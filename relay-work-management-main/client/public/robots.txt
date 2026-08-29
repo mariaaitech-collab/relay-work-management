@@ -1,0 +1,13 @@
+User-agent: *
+Allow: /
+
+# Auth-gated and app routes should not be indexed
+Disallow: /login
+Disallow: /register
+Disallow: /forgot-password
+Disallow: /reset-password
+Disallow: /dashboard
+Disallow: /admin
+
+# TODO: Replace relay.example.com with your production domain
+Sitemap: https://relay.example.com/sitemap.xml
