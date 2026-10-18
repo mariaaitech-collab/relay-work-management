@@ -1,138 +1,63 @@
-# ⚡ EmpTrack Pro — Employee Performance & Tracking System
+# Relay Work Management
+> A staff portal where managers track attendance, assign tasks and review daily work in one place.
 
-EmpTrack Pro is a full-stack, enterprise-grade Employee Performance & Attendance Tracking Portal built with **React (Vite)**, **Tailwind CSS**, **Node.js / Express**, and **MongoDB (Mongoose)**. 
+![language](https://img.shields.io/badge/language-JavaScript-4338CA?style=flat-square&logo=javascript&logoColor=white) ![framework](https://img.shields.io/badge/framework-React_%2B_Express-4338CA?style=flat-square&logo=react&logoColor=white) ![license](https://img.shields.io/badge/license-MIT-6366F1?style=flat-square) ![status](https://img.shields.io/badge/status-complete-818CF8?style=flat-square)
 
-Designed with a modern **Craftive Labs Lavender UI System**, it provides real-time performance score analytics, daily check-in attendance, work submission tracking with screenshot upload & GitHub repository verification, and broadcast notifications.
+## Overview
+Relay gives a small team one place to run the working day. Managers see who has checked in, hand out tasks and review proof of work, while employees log attendance, submit their work and track their own performance score. It's built for agencies and small businesses that manage remote or hybrid staff.
 
----
+## Features
+- Admin dashboard with employee directory: add, edit and remove staff, and manually adjust performance scores
+- Daily attendance check-in for employees, with a configurable check-in window and an admin "today" view
+- Task assignment, so employees can see their assigned tasks and mark them as started
+- Proof-of-work submissions with screenshot upload (Cloudinary), reviewed and scored by an admin
+- In-app messaging between team members, plus admin broadcast notifications
+- Secure login with JWT, email password reset, rate limiting, and a scheduled daily score check
 
-## 🎨 Key Features
+## Tech Stack
+| Layer | Technology | Version |
+|---|---|---|
+| Frontend | React | 19.2 |
+| Frontend | Vite | 8.1 |
+| Frontend | Tailwind CSS | 4.3 |
+| Frontend | React Router | 7.18 |
+| Frontend | Axios | 1.18 |
+| Backend | Node.js + Express | 5.2 |
+| Database | MongoDB + Mongoose | 9.9 |
+| Auth | jsonwebtoken + bcrypt | 9.0 / 6.0 |
+| Uploads | Multer + Cloudinary | 2.2 / 1.41 |
+| Email | Nodemailer | 9.0 |
+| Jobs | node-cron | 4.6 |
+| Security | Helmet + express-rate-limit | 8.3 / 8.6 |
 
-### 👑 Admin Portal
-- **Executive Analytics Dashboard**: Overview of total employees, team average score, and at-risk employee counts.
-- **Employee Directory**: Searchable list with quick actions to view detailed histories, edit details, update scores, or delete accounts.
-- **Score Override & Audit Logs**: Manually adjust performance scores with audit trail logging.
-- **Broadcast Announcements**: Send targeted or organization-wide notifications to employees.
-- **Employee Registration**: Register new employee accounts directly from the admin panel.
+## Screenshots
+<!-- Maria: add screenshots here -->
 
-### 👤 Employee Portal
-- **Daily Attendance Check-in**: One-click daily check-in with attendance history tracking.
-- **Proof of Work Submission**: Upload daily work screenshots (Cloudinary integration) and GitHub repository links.
-- **Dynamic Performance Gauge**: Visual score gauge with automated status indicators (`Active`, `Warning`, `Blocked`).
-- **Interactive Daily Checklist**: Clear checklist items for daily tasks and requirements.
-- **Notification Center**: Real-time notification inbox for admin announcements.
+## Getting Started
+**Prerequisites:** Node.js 18+, and MongoDB (local or Atlas). Optional: a Cloudinary account for screenshot uploads, and an SMTP/Gmail account for password-reset emails.
 
-### 🗄️ Database & Fallback Layer
-- **MongoDB & Mongoose ORM**: Schema definitions for `User`, `ProofOfWork`, `Attendance`, `Notification`, and `ScoreHistory`.
-- **Zero-Config Fallback**: Includes `mongodb-memory-server` fallback — if local or MongoDB Atlas instances are unreachable, an in-memory database automatically initializes for instant development!
-- **Auto-Seeding**: Automatically seeds initial default Admin and Employee accounts upon first startup.
-
----
-
-## 🛠️ Technology Stack
-
-- **Frontend**: React 19, Vite, Tailwind CSS, Axios, React Router v7, Plus Jakarta Sans typography
-- **Backend**: Node.js, Express.js, Mongoose (MongoDB ORM), JWT Authentication, Bcrypt, Multer, Cloudinary, Express Rate Limit
-- **Database**: MongoDB / Mongoose (with in-memory fallback)
-
----
-
-## 🔑 Demo Credentials
-
-| Role | Email | Password | Quick Action |
-|---|---|---|---|
-| 👑 **Admin** | `admin@emptrack.com` | `admin123` | Click **Admin Demo** on Login Screen |
-| 👤 **Employee** | `employee@emptrack.com` | `employee123` | Click **Employee Demo** on Login Screen |
-
----
-
-## 🚀 Quick Start & Installation Guide
-
-Follow these steps to run the application on your local machine:
-
-### 1. Prerequisites
-- **Node.js** (v16.0.0 or higher)
-- **npm** or **yarn**
-- **Git**
-
-### 2. Clone the Repository
 ```bash
-git clone https://github.com/bughunter-mano/employee-tracking-system.git
-cd employee-tracking-system
-```
+git clone https://github.com/mariaaitech-collab/relay-work-management.git
+cd relay-work-management/relay-work-management-main
 
-### 3. Server (Backend) Setup
-```bash
-# Navigate to server directory
+# Backend
 cd server
-
-# Install dependencies
+cp .env.example .env      # then fill in MONGODB_URI, JWT_SECRET, MASTER_ADMIN_PASSWORD, etc.
 npm install
+npm run setup-admin       # creates the admin account
+npm run dev               # http://localhost:5000
 
-# Configure environment variables (create .env file in server/)
-```
-
-Create a `.env` file in the `server/` directory with the following variables:
-```env
-PORT=5000
-JWT_SECRET=mySuperSecretKey123
-MONGODB_URI=mongodb://127.0.0.1:27017/employee_tracking
-NODE_ENV=development
-FRONTEND_URL=http://localhost:5173
-
-# Optional: Cloudinary configuration for image uploads
-CLOUDINARY_CLOUD_NAME=your_cloud_name
-CLOUDINARY_API_KEY=your_api_key
-CLOUDINARY_API_SECRET=your_api_secret
-```
-
-Start the backend development server:
-```bash
-npm run dev
-```
-*Backend will run on `http://localhost:5000`.*
-
-### 4. Client (Frontend) Setup
-Open a new terminal window:
-```bash
-# Navigate to client directory
-cd client
-
-# Install dependencies
+# Frontend (new terminal)
+cd ../client
 npm install
-
-# Start Vite dev server
-npm run dev
+npm run dev               # http://localhost:5173
 ```
-*Frontend will run on `http://localhost:5173`.*
+
+Set `VITE_API_URL` in the client if the API isn't on `http://localhost:5000/api`.
+
+## Status
+**Complete.** The admin and employee modules are all built.
+Still to do: automated tests, and a new live deployment (the previous Vercel URL no longer resolves).
 
 ---
-
-## 📁 Project Structure
-
-```text
-employee-tracking-system/
-├── client/                     # React Frontend Application
-│   ├── src/
-│   │   ├── api/                # Axios instance & API config
-│   │   ├── assets/             # Images & static assets
-│   │   ├── components/         # Reusable components (Navbar, ProtectedRoute)
-│   │   ├── pages/              # Login, AdminDashboard, EmployeeDashboard, ForgotPassword
-│   │   ├── App.jsx             # React Router configuration
-│   │   └── index.css           # Tailwind CSS & custom design tokens
-│   └── package.json
-│
-└── server/                     # Express Backend Application
-    ├── config/                 # Database connection & auto-seeding (db.js)
-    ├── controllers/            # Auth, Admin, Employee, Score, Notification controllers
-    ├── middleware/             # Auth & Role verification middleware
-    ├── models/                 # Mongoose schemas (User, Attendance, Work, Notification, Score)
-    ├── routes/                 # Express API routes
-    ├── index.js                # Express app entry point
-    └── package.json
-```
-
----
-
-## 📄 License
-This project is open-source and available under the [ISC License](LICENSE).
+Built by Maria Shafqat · [Linktree](https://linktr.ee/mariashafqat_)
